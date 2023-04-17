@@ -148,10 +148,14 @@ class Resnet50_Arc_loss(ModelRawBackend):
         self.window_length = 1.5
         self.window_frames = int(self.window_length * 16000)
 
+        opts = rt.SessionOptions()
+        opts.inter_op_num_threads = 1
+        opts.intra_op_num_threads = 1
+
         self.onnx_sess = rt.InferenceSession(
             os.path.join(
             LIB_FOLDER_LOCATION, "models/resnet_50_arc/slim_93%_accuracy_72.7390%.onnx"),
-            sess_options= rt.SessionOptions(),
+            sess_options=opts,
             providers=["CPUExecutionProvider"]
         )
         
