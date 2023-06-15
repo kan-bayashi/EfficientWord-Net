@@ -1,5 +1,4 @@
 import glob
-import tflite_runtime.interpreter as tflite
 import os
 import numpy as np
 import random
@@ -66,6 +65,8 @@ class First_Iteration_Siamese(ModelRawBackend) :
     def __init__(self) :
         self.window_length = 1.0 # 1 second
         self.window_frames = int(self.window_length * 16000)     
+        import tflite_runtime.interpreter as tflite
+
         self.logmelcalc_interpreter = tflite.Interpreter(
                 model_path=os.path.join(LIB_FOLDER_LOCATION,"models/first_iteration_siamese/logmelcalc.tflite"
             )
